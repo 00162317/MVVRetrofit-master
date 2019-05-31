@@ -9,6 +9,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 
+const val GITHUB_API_BASE_URI = "https://api.github.com/"
+
 interface GitHubService {
 
     @GET("/users/{user}/repos")
@@ -17,6 +19,7 @@ interface GitHubService {
     companion object {
         fun getRetrofit():GitHubService{
             return Retrofit.Builder()
+                .baseUrl(GITHUB_API_BASE_URI)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .build().create(GitHubService::class.java)
